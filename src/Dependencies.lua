@@ -23,5 +23,7 @@ require 'src/Animation'
 -- Game states
 require 'src/states/BaseState'
 
-
+require 'src/states/game/StartState'
+require 'src/states/game/PlayState'
+require 'src/states/game/GameOverState'
 
