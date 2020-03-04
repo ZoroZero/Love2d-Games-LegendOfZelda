@@ -9,9 +9,9 @@ StartState = Class {__includes = BaseState}
 
 -- UPDATE
 function StartState:update(dt)
-    -- if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then 
-    --     game_State_Machine:change('standby', {score = 0, stage = 1});
-    -- end
+    if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then 
+        game_State_Machine:change('play');
+    end
 end
 
 -- RENDER

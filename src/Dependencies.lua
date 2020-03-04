@@ -19,6 +19,10 @@ require 'src/Animation'
 
 -- Game component
 
+-- Game world
+require 'src/world/Room'
+require 'src/world/Doorway'
+require 'src/world/Dungeon'
 
 -- Game states
 require 'src/states/BaseState'

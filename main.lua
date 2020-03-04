@@ -1,7 +1,5 @@
 require 'src/Dependencies'
 
-MAP_WIDTH = 200;
-MAP_HEIGHT = 10;
 -- LOAD FUNCTION
 function love.load()
     -- SET UP TEXTURE RENDER OPTIONS
@@ -23,7 +21,7 @@ function love.load()
     -- SET UP STATE MACHINE
     game_State_Machine = StateMachine {
         ['start'] = function () return StartState() end;
-
+        ['play'] = function () return PlayState() end;
     }
 
     game_State_Machine:change('start');
