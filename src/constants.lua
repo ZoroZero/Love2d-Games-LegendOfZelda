@@ -57,11 +57,13 @@ game_Fonts = {
 -- TEXTURE
 game_Textures = {
     ['background'] = love.graphics.newImage('assets/graphics/background.png'),
-    ['tiles'] = love.graphics.newImage('assets/graphics/tilesheet.png')
+    ['tiles'] = love.graphics.newImage('assets/graphics/tilesheet.png'),
+    ['entities'] = love.graphics.newImage('assets/graphics/entities.png'),
 }
 
 
 -- GAME FRAMES
 game_Frames = {
     ['tiles'] = generateQuad(game_Textures['tiles'], TILE_SIZE, TILE_SIZE),
+    ['entities'] = generateQuad(game_Textures['entities'], TILE_SIZE, TILE_SIZE)
 }

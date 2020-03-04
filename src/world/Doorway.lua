@@ -18,11 +18,11 @@ function Doorway:init(direction, is_Open, room)
         self.height = 16;
     elseif self.direction == 'bottom' then 
         self.x = MAP_RENDER_OFFSET_X + (MAP_WIDTH/2)*TILE_SIZE - TILE_SIZE;
-        self.y = MAP_RENDER_OFFSET_Y + (MAP_HEIGHT - 1) * TILE_SIZE ;
+        self.y = MAP_RENDER_OFFSET_Y + (MAP_HEIGHT) * TILE_SIZE ;
         self.width = 32;
         self.height = 16;
     elseif self.direction == 'left' then 
-        self.x = MAP_RENDER_OFFSET_X;
+        self.x = MAP_RENDER_OFFSET_X - TILE_SIZE;
         self.y = MAP_RENDER_OFFSET_Y + (MAP_HEIGHT/2)*TILE_SIZE - TILE_SIZE;
         self.width = 16;
         self.height = 32;

@@ -10,9 +10,10 @@ function Room:init(player)
 
     -- Tiles in the room
     self.tiles = {};
-
+    self:generateWallAndFloor();
     -- Entites in the room
     self.entities = {};
+    self:generateEnemy();
 
     -- Onjects in the room 
     self.objects = {};
@@ -26,6 +27,11 @@ function Room:init(player)
 
     -- NEXT ROOM
     self.next_Room = nil;
+
+    -- DRAWING OFFSET
+    self.render_Offset_X = MAP_RENDER_OFFSET_X;
+    self.render_Offset_Y = MAP_RENDER_OFFSET_Y;
+
 end
 
 -- UPDATE
@@ -35,11 +41,84 @@ end
 
 -- RENDER
 function Room:render()
+    for y = 1, self.height do 
+        for x = 1, self.width do
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][self.tiles[y][x].id], 
+            (x-1)*TILE_SIZE + self.render_Offset_X, (y-1)*TILE_SIZE + self.render_Offset_Y);
+        end
+    end
 
+    for k, doorway in pairs(self.doorways) do 
+        doorway:render();
+    end
+
+    for k , entity in pairs(self.entities) do
+        entity:render()
+    end
 end
 
 
 -- GENERATE THE TILES INSIDE ROOM
 function Room:generateWallAndFloor()
-    
+    for y = 1, self.height do 
+
+        table.insert( self.tiles, {} );
+
+        for x = 1, self.width do 
+            local id = EMPTY_TILE;
+
+            if x == 1 and y == 1 then 
+                id = TILE_TOP_LEFT_CORNER;
+            elseif x == 1 and y == self.height then 
+                id = TILE_BOTTOM_LEFT_CORNER;
+            elseif x == self.width and y ==1 then 
+                id = TILE_TOP_RIGHT_CORNER;
+            elseif x == self.width and y == self.height then 
+                id = TILE_BOTTOM_RIGHT_CORNER;
+            elseif x == 1 then 
+                id = TILE_LEFT_WALLS[math.random(#TILE_LEFT_WALLS)];
+            elseif x == self.width then 
+                id = TILE_RIGHT_WALLS[math.random(#TILE_RIGHT_WALLS)];
+            elseif y == 1 then 
+                id = TILE_TOP_WALLS[math.random(#TILE_TOP_WALLS)];
+            elseif y == self.height then 
+                id = TILE_BOTTOM_WALLS[math.random(#TILE_BOTTOM_WALLS)];
+            else 
+                id = TILE_FLOORS[math.random(#TILE_FLOORS)];
+            end 
+
+            table.insert( self.tiles[y], {id = id} );
+        end
+    end
+
+end
+
+
+-- GENERATE ENEMY FUNCTION
+function Room:generateEnemy()
+    local enemy = {'bat', 'skeleton'};
+
+    for i = 1, 10 do 
+        local enemy_Type = enemy[math.random(#enemy)];
+
+        local enemy = Entity{
+            animations = ENTITY_DEF[enemy_Type].animations,
+
+            x = math.random(MAP_RENDER_OFFSET_X + TILE_SIZE, VIRTUAL_WIDTH/2),
+            y = math.random(MAP_RENDER_OFFSET_Y+ TILE_SIZE, VIRTUAL_HEIGHT/2),
+            
+            width = TILE_SIZE,
+            height = TILE_SIZE,
+
+            walk_Speed = 20,
+
+            health = 1
+        }
+        
+        table.insert(self.entities, enemy );
+        self.entities[i].stateMachine = StateMachine{
+            ['idle'] = function () return EntityIdleState(self.entities[i]) end,
+        }
+        self.entities[i]:changeState('idle');
+    end
 end
