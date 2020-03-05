@@ -5,11 +5,18 @@ function EntityIdleState:init( entity )
     self.entity = entity;
 
     self.entity:changeAnimation('idle-' .. self.entity.direction);
+
+    -- AI waiting
+    self.wait_Timer = 0;
+    self.wait_Duration = math.random(5);
 end
 
 -- UPDATE
 function EntityIdleState:update(dt)
-    -- body
+    self.wait_Timer = self.wait_Timer + dt;
+    if self.wait_Timer > self.wait_Duration then
+        self.entity:changeState('walk');
+    end
 end
 
 -- RENDER

@@ -12,6 +12,7 @@ function PlayState:update(dt)
     -- if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then 
     --     game_State_Machine:change('play');
     -- end
+    self.room:update(dt);
 end
 
 -- RENDER

@@ -41,7 +41,18 @@ end
 
 -- UPDATE
 function Room:update(dt)
+    
+    for k, doorway in pairs(self.doorways) do 
+        doorway:update(dt);
+    end
 
+    for k , object in pairs(self.objects) do
+        object:update(dt);
+    end
+
+    for k , entity in pairs(self.entities) do
+        entity:update(dt);
+    end
 end
 
 -- RENDER
@@ -105,7 +116,7 @@ end
 
 -- GENERATE ENEMY FUNCTION
 function Room:generateEnemy()
-    local enemy = {'bat', 'skeleton'};
+    local enemy = {'bat', 'skeleton', 'slime', 'ghost', 'spider'};
 
     for i = 1, 10 do 
         local enemy_Type = enemy[math.random(#enemy)];
@@ -127,8 +138,9 @@ function Room:generateEnemy()
         table.insert(self.entities, enemy );
         self.entities[i].stateMachine = StateMachine{
             ['idle'] = function () return EntityIdleState(self.entities[i]) end,
+            ['walk'] = function () return EntityWalkState(self.entities[i]) end,
         }
-        self.entities[i]:changeState('idle');
+        self.entities[i]:changeState('walk');
     end
 end
 

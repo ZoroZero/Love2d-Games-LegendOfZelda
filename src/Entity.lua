@@ -15,7 +15,7 @@ function Entity:init(params)
     self.offset_X = params.offset_X or 0;
     self.offset_Y = params.offset_Y or 0;
 
-    self.walk_Speed = params.walk_Speed;
+    self.walk_Speed = params.walk_Speed or 20;
 
     -- Direction
     self.direction = 'down';
