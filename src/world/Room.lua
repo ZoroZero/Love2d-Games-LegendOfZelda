@@ -17,6 +17,7 @@ function Room:init(player)
 
     -- Onjects in the room 
     self.objects = {};
+    self:generateObject();
 
     -- doorway
     self.doorways = {}
@@ -50,6 +51,10 @@ function Room:render()
 
     for k, doorway in pairs(self.doorways) do 
         doorway:render();
+    end
+
+    for k , object in pairs(self.objects) do
+        object:render()
     end
 
     for k , entity in pairs(self.entities) do
@@ -121,4 +126,16 @@ function Room:generateEnemy()
         }
         self.entities[i]:changeState('idle');
     end
+end
+
+-- GENERATE OBJECTS
+function Room:generateObject()
+    local switch = GameObject ( GAME_OBJECT_DEFS['switch'], 
+    math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,  MAP_RENDER_OFFSET_X + (MAP_WIDTH - 2) * TILE_SIZE),
+    math.random(MAP_RENDER_OFFSET_Y+ TILE_SIZE, MAP_RENDER_OFFSET_Y + (MAP_HEIGHT - 2) * TILE_SIZE)
+    );
+
+    table.insert( self.objects, switch )
+
+    -- switch.onCollide = function ()
 end

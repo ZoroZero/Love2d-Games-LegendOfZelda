@@ -7,6 +7,7 @@ Timer = require 'lib/knife.timer'
 -- Constants
 require 'src/constants'
 require 'src/Entity_Defs'
+require 'src/Object_Defs'
 -- State 
 require 'src/StateMachine'
 
@@ -20,6 +21,7 @@ require 'src/Animation'
 
 -- Game component
 require 'src/Entity'
+require 'src/GameObject'
 -- Game world
 require 'src/world/Room'
 require 'src/world/Doorway'
