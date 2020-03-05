@@ -22,6 +22,8 @@ require 'src/Animation'
 -- Game component
 require 'src/Entity'
 require 'src/GameObject'
+
+require 'src/Player'
 -- Game world
 require 'src/world/Room'
 require 'src/world/Doorway'
@@ -38,4 +40,8 @@ require 'src/states/game/GameOverState'
 -- Entity state 
 require 'src/states/entity/EntityIdleState'
 require 'src/states/entity/EntityWalkState'
+
+-- Player state
+require 'src/states/player/PlayerIdleState'
+require 'src/states/player/PlayerWalkState'
 

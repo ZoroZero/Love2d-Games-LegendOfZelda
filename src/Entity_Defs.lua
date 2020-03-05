@@ -1,4 +1,49 @@
 ENTITY_DEF = {
+    ['player'] = {
+        walk_Speed = 30,
+        animations = {
+            ['idle-up'] = {
+                frames = {9},
+                interval = 1,
+                texture = 'character_walk'
+            },
+            ['idle-down'] = {
+                frames = {1},
+                interval = 1,
+                texture = 'character_walk'
+            },
+            ['idle-left'] = {
+                frames = {13},
+                interval = 1,
+                texture = 'character_walk'
+            },
+            ['idle-right'] = {
+                frames = {5},
+                interval = 1,
+                texture = 'character_walk'
+            },
+            ['walk-up'] = {
+                frames = {9, 10, 11, 12},
+                interval = 0.1,
+                texture = 'character_walk'
+            },
+            ['walk-down'] = {
+                frames = {1, 2, 3, 4},
+                interval = 0.1,
+                texture = 'character_walk'
+            },
+            ['walk-left'] = {
+                frames = {13, 14, 15, 16},
+                interval = 0.1,
+                texture = 'character_walk'
+            },
+            ['walk-right'] = {
+                frames = {5, 6, 7, 8},
+                interval = 0.1,
+                texture = 'character_walk'
+            }
+        }
+    },
     ['skeleton'] = {
         texture = 'entities',
         animations = {

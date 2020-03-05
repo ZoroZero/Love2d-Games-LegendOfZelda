@@ -40,6 +40,7 @@ TILE_BOTTOM_WALLS = {79, 80, 81}
 TILE_LEFT_WALLS = {77, 96, 115}
 TILE_RIGHT_WALLS = {78, 97, 116}
 
+
 -- SOUND
 game_Sounds = {
     -- ['death'] = love.audio.newSource('assets/sounds/death.wav', 'static')
@@ -60,6 +61,7 @@ game_Textures = {
     ['tiles'] = love.graphics.newImage('assets/graphics/tilesheet.png'),
     ['entities'] = love.graphics.newImage('assets/graphics/entities.png'),
     ['switches'] = love.graphics.newImage('assets/graphics/switches.png'),
+    ['character_walk'] = love.graphics.newImage('assets/graphics/character_walk.png'),
 }
 
 
@@ -68,4 +70,5 @@ game_Frames = {
     ['tiles'] = generateQuad(game_Textures['tiles'], TILE_SIZE, TILE_SIZE),
     ['entities'] = generateQuad(game_Textures['entities'], TILE_SIZE, TILE_SIZE),
     ['switches'] = generateQuad(game_Textures['switches'], TILE_SIZE, TILE_SIZE),
+    ['character_walk'] = generateQuad(game_Textures['character_walk'], TILE_SIZE, 32)
 }

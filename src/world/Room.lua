@@ -53,6 +53,8 @@ function Room:update(dt)
     for k , entity in pairs(self.entities) do
         entity:update(dt);
     end
+
+    self.player:update(dt);
 end
 
 -- RENDER
@@ -75,6 +77,8 @@ function Room:render()
     for k , entity in pairs(self.entities) do
         entity:render(self.adjacent_Offset_X, self.adjacent_Offset_Y)
     end
+
+    self.player:render(self.adjacent_Offset_X, self.adjacent_Offset_Y);
 end
 
 
