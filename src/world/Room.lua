@@ -33,6 +33,10 @@ function Room:init(player)
     self.render_Offset_X = MAP_RENDER_OFFSET_X;
     self.render_Offset_Y = MAP_RENDER_OFFSET_Y;
 
+    -- Offset of adjacent room - Used when change room
+    self.adjacent_Offset_X = 0;
+    self.adjacent_Offset_Y = 0;
+
 end
 
 -- UPDATE
@@ -50,15 +54,15 @@ function Room:render()
     end
 
     for k, doorway in pairs(self.doorways) do 
-        doorway:render();
+        doorway:render(self.adjacent_Offset_X, self.adjacent_Offset_Y);
     end
 
     for k , object in pairs(self.objects) do
-        object:render()
+        object:render(self.adjacent_Offset_X, self.adjacent_Offset_Y);
     end
 
     for k , entity in pairs(self.entities) do
-        entity:render()
+        entity:render(self.adjacent_Offset_X, self.adjacent_Offset_Y)
     end
 end
 
@@ -109,8 +113,8 @@ function Room:generateEnemy()
         local enemy = Entity{
             animations = ENTITY_DEF[enemy_Type].animations,
 
-            x = math.random(MAP_RENDER_OFFSET_X + TILE_SIZE, VIRTUAL_WIDTH/2),
-            y = math.random(MAP_RENDER_OFFSET_Y+ TILE_SIZE, VIRTUAL_HEIGHT/2),
+            x = math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,  MAP_RENDER_OFFSET_X + (MAP_WIDTH - 2) * TILE_SIZE),
+            y = math.random(MAP_RENDER_OFFSET_Y+ TILE_SIZE, MAP_RENDER_OFFSET_Y + (MAP_HEIGHT - 2) * TILE_SIZE),
             
             width = TILE_SIZE,
             height = TILE_SIZE,

@@ -41,54 +41,56 @@ function Doorway:update(dt)
 end
 
 -- RENDER
-function Doorway:render()
+function Doorway:render(adjacent_Offset_X, adjacent_Offset_Y)
+    local x = self.x + adjacent_Offset_X;
+    local y = self.y + adjacent_Offset_Y;
     if self.direction == 'top' then 
         if self.is_Open then 
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][98], self.x, self.y - TILE_SIZE);
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][99], self.x + TILE_SIZE, self.y - TILE_SIZE);
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][117], self.x, self.y);
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][118], self.x + TILE_SIZE, self.y);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][98], x, y - TILE_SIZE);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][99], x + TILE_SIZE, y - TILE_SIZE);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][117], x, y);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][118], x + TILE_SIZE, y);
         else
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][134], self.x, self.y - TILE_SIZE);
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][135], self.x + TILE_SIZE, self.y - TILE_SIZE);
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][153], self.x, self.y);
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][154], self.x + TILE_SIZE, self.y);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][134], x, y - TILE_SIZE);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][135], x + TILE_SIZE, y - TILE_SIZE);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][153], x, y);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][154], x + TILE_SIZE, y);
         end
     elseif self.direction == 'bottom' then 
         if self.is_Open then 
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][141], self.x, self.y - TILE_SIZE);
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][142], self.x + TILE_SIZE, self.y - TILE_SIZE);
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][160], self.x, self.y);
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][161], self.x + TILE_SIZE, self.y);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][141], x, y - TILE_SIZE);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][142], x + TILE_SIZE, y - TILE_SIZE);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][160], x, y);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][161], x + TILE_SIZE, y);
         else
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][216], self.x, self.y - TILE_SIZE);
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][217], self.x + TILE_SIZE, self.y - TILE_SIZE);
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][235], self.x, self.y);
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][236], self.x + TILE_SIZE, self.y);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][216], x, y - TILE_SIZE);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][217], x + TILE_SIZE, y - TILE_SIZE);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][235], x, y);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][236], x + TILE_SIZE, y);
         end
     elseif self.direction == 'right' then 
         if self.is_Open then 
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][172], self.x, self.y - TILE_SIZE);
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][173], self.x + TILE_SIZE, self.y - TILE_SIZE);
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][191], self.x, self.y);
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][192], self.x + TILE_SIZE, self.y);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][172], x, y - TILE_SIZE);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][173], x + TILE_SIZE, y - TILE_SIZE);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][191], x, y);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][192], x + TILE_SIZE, y);
         else
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][174], self.x, self.y - TILE_SIZE);
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][175], self.x + TILE_SIZE, self.y - TILE_SIZE);
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][193], self.x, self.y);
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][194], self.x + TILE_SIZE, self.y);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][174], x, y - TILE_SIZE);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][175], x + TILE_SIZE, y - TILE_SIZE);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][193], x, y);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][194], x + TILE_SIZE, y);
         end
     elseif self.direction == 'left' then 
         if self.is_Open then 
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][181], self.x, self.y - TILE_SIZE);
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][182], self.x + TILE_SIZE, self.y - TILE_SIZE);
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][200], self.x, self.y);
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][201], self.x + TILE_SIZE, self.y);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][181], x, y - TILE_SIZE);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][182], x + TILE_SIZE, y - TILE_SIZE);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][200], x, y);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][201], x + TILE_SIZE, y);
         else
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][219], self.x, self.y - TILE_SIZE);
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][220], self.x + TILE_SIZE, self.y - TILE_SIZE);
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][238], self.x, self.y);
-            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][239], self.x + TILE_SIZE, self.y);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][219], x, y - TILE_SIZE);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][220], x + TILE_SIZE, y - TILE_SIZE);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][238], x, y);
+            love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][239], x + TILE_SIZE, y);
         end
     end
 end

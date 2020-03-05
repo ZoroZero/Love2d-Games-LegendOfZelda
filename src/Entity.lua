@@ -38,8 +38,10 @@ end
 
 
 -- RENDER FUNCTION
-function Entity:render()
+function Entity:render(adjacent_Offset_X, adjacent_Offset_Y)
+    self.x ,self.y = self.x + (adjacent_Offset_X or 0), self.y + (adjacent_Offset_Y or 0);
     self.stateMachine:render();
+    self.x ,self.y = self.x - (adjacent_Offset_X or 0), self.y - (adjacent_Offset_Y or 0);
 end
 
 
