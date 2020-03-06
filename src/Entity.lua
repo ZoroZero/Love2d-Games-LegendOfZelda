@@ -71,3 +71,9 @@ function Entity:collide(target)
     return not(self.x > target.x + target.width or self.x + self.width < target.x 
                 or self.y > target.y + target.height or self.y + self.height < target.y)
 end
+
+
+-- AI PROCESS
+function Entity:processAI(params, dt)
+    self.stateMachine:processAI(params, dt);
+end

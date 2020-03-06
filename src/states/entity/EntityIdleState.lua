@@ -13,10 +13,7 @@ end
 
 -- UPDATE
 function EntityIdleState:update(dt)
-    self.wait_Timer = self.wait_Timer + dt;
-    if self.wait_Timer > self.wait_Duration then
-        self.entity:changeState('walk');
-    end
+   
 end
 
 -- RENDER
@@ -25,4 +22,13 @@ function EntityIdleState:render()
     love.graphics.draw(game_Textures[ani.texture], game_Frames[ani.texture][ani:getCurrentFrame()],
         math.floor(self.entity.x - self.entity.offset_X), math.floor(self.entity.y - self.entity.offset_Y)
     )
+end
+
+
+-- Process AI
+function EntityIdleState:processAI(params, dt)
+     self.wait_Timer = self.wait_Timer + dt;
+    if self.wait_Timer > self.wait_Duration then
+        self.entity:changeState('walk');
+    end
 end

@@ -51,7 +51,9 @@ function Room:update(dt)
     end
 
     for k , entity in pairs(self.entities) do
+        entity:processAI({room = 1}, dt);
         entity:update(dt);
+
     end
 
     self.player:update(dt);
@@ -144,7 +146,7 @@ function Room:generateEnemy()
             ['idle'] = function () return EntityIdleState(self.entities[i]) end,
             ['walk'] = function () return EntityWalkState(self.entities[i]) end,
         }
-        self.entities[i]:changeState('walk');
+        self.entities[i]:changeState('idle');
     end
 end
 

@@ -14,7 +14,7 @@ function PlayState:init()
             width = TILE_SIZE,
             height = 22,
 
-            health = 1,
+            health = 6,
             offset_Y = 5,
     };
 
@@ -40,8 +40,22 @@ end
 
 -- RENDER
 function PlayState:render()
+    love.graphics.push();
     self.dungeon:render();
+    love.graphics.pop();
+
+    -- render health
     
-    love.graphics.printf(tostring(MAP_WIDTH) .. ' ' .. tostring(MAP_HEIGHT), 0, 0, VIRTUAL_WIDTH, 'center');
+    for i = 1, 3 do
+        local heart_frame = 1;
+        if self.player.health >= i*2 then 
+            heart_frame = 5;
+        elseif self.player.health == i*2 - 1 then 
+            heart_frame = 3;
+        end
+
+        love.graphics.draw(game_Textures['hearts'], game_Frames['hearts'][heart_frame],
+        (i - 1) * TILE_SIZE, 0);
+    end
 end
 
