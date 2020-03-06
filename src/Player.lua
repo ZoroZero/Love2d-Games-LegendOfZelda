@@ -17,8 +17,9 @@ function Player:render(adjacent_Offset_X, adjacent_Offset_Y)
 end
 
 -- CHECK COLLISION
-function Player:checkCollision(target)
+function Player:collide(target)
     local selfY, self_Height = self.y + self.height/2, self.height/2;
     return not(self.x > target.x + target.width or self.x + self.width < target.x 
             or selfY > target.y + target.height or selfY + self_Height < target.y)
 end
+

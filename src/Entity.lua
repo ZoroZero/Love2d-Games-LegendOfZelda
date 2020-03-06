@@ -22,11 +22,29 @@ function Entity:init(params)
     
     -- health
     self.health = params.health;
+
+    -- Invulnerable
+    self.invulnerable = false;
+    self.invulnerable_Timer = 0;
+    self.invulnerable_Duration = 0;
+    self.flash_Timer = 0;
 end
 
 
 -- UPDATE FUNCTION
 function Entity:update(dt)
+    -- Update if invulnerable
+    if self.invulnerable then 
+        self.flash_Timer = self.flash_Timer + dt;
+        self.invulnerable_Timer = self.invulnerable_Timer + dt;
+        if self.invulnerable_Timer >= self.invulnerable_Duration then
+            self.invulnerable = false;
+            self.invulnerable_Timer = 0;
+            self.invulnerable_Duration = 0;
+            self.flash_Timer = 0;
+        end
+    end
+
     self.stateMachine:update(dt);
 end
 
@@ -39,6 +57,12 @@ end
 
 -- RENDER FUNCTION
 function Entity:render(adjacent_Offset_X, adjacent_Offset_Y)
+    -- if invulnerable
+    if self.invulnerable and self.flash_Timer > 0.08 then 
+        love.graphics.setColor(1,1,1,0);
+        self.flash_Timer = 0;
+    end
+    
     self.x ,self.y = self.x + (adjacent_Offset_X or 0), self.y + (adjacent_Offset_Y or 0);
     self.stateMachine:render();
     self.x ,self.y = self.x - (adjacent_Offset_X or 0), self.y - (adjacent_Offset_Y or 0);
@@ -76,4 +100,17 @@ end
 -- AI PROCESS
 function Entity:processAI(params, dt)
     self.stateMachine:processAI(params, dt);
+end
+
+
+-- Damage entity
+function Entity:damage(dam)
+    self.health = self.health - dam;
+end
+
+
+-- Go invulnerable
+function Entity:goInvulnerable(duration)
+    self.invulnerable = true;
+    self.invulnerable_Duration = duration;
 end

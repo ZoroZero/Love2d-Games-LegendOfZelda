@@ -48,12 +48,18 @@ function Room:update(dt)
 
     for k , object in pairs(self.objects) do
         object:update(dt);
+        if self.player:collide(object) then 
+            object:onCollide();
+        end
     end
 
     for k , entity in pairs(self.entities) do
         entity:processAI({room = 1}, dt);
         entity:update(dt);
-
+        if not entity.dead and entity:collide(self.player) and not self.player.invulnerable then 
+            self.player:damage(1);
+            self.player:goInvulnerable(1.5);
+        end
     end
 
     self.player:update(dt);
@@ -159,5 +165,12 @@ function Room:generateObject()
 
     table.insert( self.objects, switch )
 
-    -- switch.onCollide = function ()
+    switch.onCollide = function ()
+        if switch.current_State == 'off' then 
+            switch.current_State = 'on'
+            for k, doorway in pairs(self.doorways) do 
+                doorway.is_Open = true;
+            end
+        end
+    end
 end
