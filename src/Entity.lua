@@ -28,6 +28,9 @@ function Entity:init(params)
     self.invulnerable_Timer = 0;
     self.invulnerable_Duration = 0;
     self.flash_Timer = 0;
+
+    -- Entity dead or not
+    self.is_Dead = false;
 end
 
 
@@ -92,8 +95,8 @@ end
 
 -- CHECK COLLISION FUNCTION
 function Entity:collide(target)
-    return not(self.x > target.x + target.width or self.x + self.width < target.x 
-                or self.y > target.y + target.height or self.y + self.height < target.y)
+    return not(self.x > target.x + target.width - 3 or self.x + self.width < target.x + 3 
+                or self.y > target.y + target.height - 3 or self.y + self.height < target.y + 3)
 end
 
 

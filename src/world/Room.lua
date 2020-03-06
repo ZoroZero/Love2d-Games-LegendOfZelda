@@ -39,6 +39,7 @@ function Room:init(player)
 
 end
 
+
 -- UPDATE
 function Room:update(dt)
     
@@ -56,7 +57,7 @@ function Room:update(dt)
     for k , entity in pairs(self.entities) do
         entity:processAI({room = 1}, dt);
         entity:update(dt);
-        if not entity.dead and entity:collide(self.player) and not self.player.invulnerable then 
+        if not entity.is_Dead and entity:collide(self.player) and not self.player.invulnerable then 
             self.player:damage(1);
             self.player:goInvulnerable(1.5);
         end
@@ -64,6 +65,7 @@ function Room:update(dt)
 
     self.player:update(dt);
 end
+
 
 -- RENDER
 function Room:render()
@@ -86,7 +88,31 @@ function Room:render()
         entity:render(self.adjacent_Offset_X, self.adjacent_Offset_Y)
     end
 
+    love.graphics.stencil(function() 
+        -- left
+        love.graphics.rectangle('fill',  - TILE_SIZE - 6, MAP_RENDER_OFFSET_Y + (MAP_HEIGHT/2)*TILE_SIZE - TILE_SIZE,
+        TILE_SIZE*2 + 6, TILE_SIZE * 2);
+
+        -- right
+        love.graphics.rectangle('fill', MAP_RENDER_OFFSET_X + (MAP_WIDTH) * TILE_SIZE - 6, MAP_RENDER_OFFSET_Y + (MAP_HEIGHT/2)*TILE_SIZE - TILE_SIZE,
+        TILE_SIZE*2 + 6, TILE_SIZE * 2);
+
+        -- top
+        love.graphics.rectangle('fill', MAP_RENDER_OFFSET_X + (MAP_WIDTH/2)*TILE_SIZE - TILE_SIZE, -TILE_SIZE - 6,
+        TILE_SIZE*2, TILE_SIZE * 2 + 6);
+
+        -- bottom
+        love.graphics.rectangle('fill', MAP_RENDER_OFFSET_X + (MAP_WIDTH/2)*TILE_SIZE - TILE_SIZE, VIRTUAL_HEIGHT - TILE_SIZE - 6,
+        TILE_SIZE*2, TILE_SIZE * 2 + 6);
+    
+    end,
+    'replace', 1)
+
+    love.graphics.setStencilTest('less', 1);
+
     self.player:render(self.adjacent_Offset_X, self.adjacent_Offset_Y);
+
+    love.graphics.setStencilTest();
 end
 
 
@@ -155,6 +181,8 @@ function Room:generateEnemy()
         self.entities[i]:changeState('idle');
     end
 end
+
+
 
 -- GENERATE OBJECTS
 function Room:generateObject()
