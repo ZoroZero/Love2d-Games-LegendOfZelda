@@ -68,6 +68,10 @@ function Entity:render(adjacent_Offset_X, adjacent_Offset_Y)
     
     self.x ,self.y = self.x + (adjacent_Offset_X or 0), self.y + (adjacent_Offset_Y or 0);
     self.stateMachine:render();
+    -- Check hit box of entity
+    love.graphics.setColor(1,0,0,1);
+    love.graphics.rectangle('line', self.x, self.y, self.width, self.height);
+    love.graphics.setColor(1,1,1,1);
     self.x ,self.y = self.x - (adjacent_Offset_X or 0), self.y - (adjacent_Offset_Y or 0);
 end
 
@@ -95,8 +99,8 @@ end
 
 -- CHECK COLLISION FUNCTION
 function Entity:collide(target)
-    return not(self.x > target.x + target.width - 3 or self.x + self.width < target.x + 3 
-                or self.y > target.y + target.height - 3 or self.y + self.height < target.y + 3)
+    return not(self.x > target.x + target.width or self.x + self.width < target.x 
+                or self.y > target.y + target.height or self.y + self.height < target.y)
 end
 
 

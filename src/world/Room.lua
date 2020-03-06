@@ -165,8 +165,8 @@ function Room:generateEnemy()
             x = math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,  MAP_RENDER_OFFSET_X + (MAP_WIDTH - 2) * TILE_SIZE),
             y = math.random(MAP_RENDER_OFFSET_Y+ TILE_SIZE, MAP_RENDER_OFFSET_Y + (MAP_HEIGHT - 2) * TILE_SIZE),
             
-            width = TILE_SIZE,
-            height = TILE_SIZE,
+            width =  ENTITY_DEF[enemy_Type].width,
+            height = ENTITY_DEF[enemy_Type].height,
 
             walk_Speed = 20,
 
