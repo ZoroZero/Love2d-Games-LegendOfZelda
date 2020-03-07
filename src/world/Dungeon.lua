@@ -115,6 +115,8 @@ function Dungeon:beginShifting(shifting_X, shifting_Y)
         for k,doorway in pairs(self.current_Room.doorways) do 
             doorway.is_Open = false;
         end
+
+        game_Sounds['door']:play()
     end
     )
 

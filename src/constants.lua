@@ -43,7 +43,11 @@ TILE_RIGHT_WALLS = {78, 97, 116}
 
 -- SOUND
 game_Sounds = {
-    -- ['death'] = love.audio.newSource('assets/sounds/death.wav', 'static')
+    ['door'] = love.audio.newSource('assets/sounds/door.wav', 'static'),
+    ['hit_enemy'] = love.audio.newSource('assets/sounds/hit_enemy.wav', 'static'),
+    ['hit_player'] = love.audio.newSource('assets/sounds/hit_player.wav', 'static'),
+    ['music'] = love.audio.newSource('assets/sounds/music.mp3', 'static'),
+    ['sword'] = love.audio.newSource('assets/sounds/sword.wav', 'static'),
 }
 
 -- FONT

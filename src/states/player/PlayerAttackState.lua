@@ -48,6 +48,8 @@ end
 
 -- ENTER FUNCTION
 function PlayerAttackState:enter(params)
+    game_Sounds['sword']:stop()
+    game_Sounds['sword']:play()
     self.player.currentAnimation:refresh()
 end
 
@@ -59,6 +61,7 @@ function PlayerAttackState:update(dt)
     for k, entity in pairs(self.dungeon.current_Room.entities) do 
         if entity:collide(self.attack_Hitbox) then 
             entity:damage(1);
+            game_Sounds['hit_enemy']:play()
         end
     end
 

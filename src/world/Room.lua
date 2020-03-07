@@ -60,6 +60,7 @@ function Room:update(dt)
         entity:processAI({room = 1}, dt);
         entity:update(dt);
         if not entity.is_Dead and entity:collide(self.player) and not self.player.invulnerable then 
+            game_Sounds['hit_player']:play()
             self.player:damage(1);
             self.player:goInvulnerable(1.5);
         end
@@ -160,13 +161,14 @@ end
 function Room:generateEnemy()
     local enemy = {'bat', 'skeleton', 'slime', 'ghost', 'spider'};
 
-    for i = 1, 5 do 
+    for i = 1, 10 do 
         local enemy_Type = enemy[math.random(#enemy)];
 
         local enemy = Entity{
             animations = ENTITY_DEF[enemy_Type].animations,
 
-            x = math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,  MAP_RENDER_OFFSET_X + (MAP_WIDTH/ 2 - 4) * TILE_SIZE),
+            x = i <=5 and math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,  MAP_RENDER_OFFSET_X + (MAP_WIDTH/ 2 - 4) * TILE_SIZE) or 
+            math.random(MAP_RENDER_OFFSET_X + (MAP_WIDTH/ 2 + 2) * TILE_SIZE,  MAP_RENDER_OFFSET_X + (MAP_WIDTH - 2) * TILE_SIZE),
             y = math.random(MAP_RENDER_OFFSET_Y+ TILE_SIZE, MAP_RENDER_OFFSET_Y + (MAP_HEIGHT - 2) * TILE_SIZE),
             
             width =  ENTITY_DEF[enemy_Type].width,
@@ -205,6 +207,8 @@ function Room:generateObject()
             for k, doorway in pairs(self.doorways) do 
                 doorway.is_Open = true;
             end
+
+            game_Sounds['door']:play()
         end
     end
 

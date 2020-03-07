@@ -28,6 +28,10 @@ function love.load()
     -- SET UP KEY CHECK
 
     love.keyboard.keysPressed = {};
+
+    -- PLAY BACKGROUND MUSIC
+    game_Sounds['music']:play();
+    game_Sounds['music']:setLooping(true);
 end
 
 
