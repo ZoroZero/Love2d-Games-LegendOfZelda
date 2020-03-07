@@ -33,7 +33,7 @@ function PlayerIdleState:update(dt)
         self.entity:changeState('walk');
     end
 
-    if love.keyboard.wasPressed('j') then 
+    if love.keyboard.wasPressed('space') then 
         self.entity:changeState('attack');
     end
 

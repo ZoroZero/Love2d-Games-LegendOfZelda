@@ -88,7 +88,7 @@ function Dungeon:beginShifting(shifting_X, shifting_Y)
         player_Y = VIRTUAL_HEIGHT + MAP_RENDER_OFFSET_Y + self.player.height/2;
     end
 
-    Timer.tween(2, {
+    Timer.tween(1, {
         [self] = {camera_X = shifting_X, camera_Y = shifting_Y},
         [self.player] = {x = player_X, y = player_Y}
     }):finish(function()
