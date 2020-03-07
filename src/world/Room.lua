@@ -11,13 +11,15 @@ function Room:init(player)
     -- Tiles in the room
     self.tiles = {};
     self:generateWallAndFloor();
+
+    -- Objects in the room 
+    self.objects = {};
+    self:generateObject();
+
     -- Entites in the room
     self.entities = {};
     self:generateEnemy();
 
-    -- Onjects in the room 
-    self.objects = {};
-    self:generateObject();
 
     -- doorway
     self.doorways = {}
@@ -158,13 +160,13 @@ end
 function Room:generateEnemy()
     local enemy = {'bat', 'skeleton', 'slime', 'ghost', 'spider'};
 
-    for i = 1, 10 do 
+    for i = 1, 5 do 
         local enemy_Type = enemy[math.random(#enemy)];
 
         local enemy = Entity{
             animations = ENTITY_DEF[enemy_Type].animations,
 
-            x = math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,  MAP_RENDER_OFFSET_X + (MAP_WIDTH - 2) * TILE_SIZE),
+            x = math.random(MAP_RENDER_OFFSET_X + TILE_SIZE,  MAP_RENDER_OFFSET_X + (MAP_WIDTH/ 2 - 4) * TILE_SIZE),
             y = math.random(MAP_RENDER_OFFSET_Y+ TILE_SIZE, MAP_RENDER_OFFSET_Y + (MAP_HEIGHT - 2) * TILE_SIZE),
             
             width =  ENTITY_DEF[enemy_Type].width,
@@ -180,7 +182,7 @@ function Room:generateEnemy()
         table.insert(self.entities, enemy );
         self.entities[i].stateMachine = StateMachine{
             ['idle'] = function () return EntityIdleState(self.entities[i]) end,
-            ['walk'] = function () return EntityWalkState(self.entities[i]) end,
+            ['walk'] = function () return EntityWalkState(self.entities[i], nil, self.objects) end,
         }
         self.entities[i]:changeState('idle');
     end
@@ -203,6 +205,17 @@ function Room:generateObject()
             for k, doorway in pairs(self.doorways) do 
                 doorway.is_Open = true;
             end
+        end
+    end
+
+
+    for y = 1, 4  do 
+        for x = 1,4 do 
+            local box = GameObject ( GAME_OBJECT_DEFS['box'],
+                MAP_RENDER_OFFSET_X + (MAP_WIDTH/2 - 3 + x) * TILE_SIZE,
+                MAP_RENDER_OFFSET_Y + (MAP_HEIGHT/2 - 3 + y)* TILE_SIZE);
+
+            table.insert(self.objects, box);
         end
     end
 end

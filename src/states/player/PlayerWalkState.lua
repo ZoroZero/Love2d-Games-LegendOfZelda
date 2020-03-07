@@ -1,12 +1,8 @@
 PlayerWalkState = Class {__includes = EntityWalkState}
 
 -- INIT
-function PlayerWalkState:init(player, dungeon)
-    self.entity = player;
-
-    self.entity:changeAnimation('walk-' .. self.entity.direction);
-
-    self.dungeon = dungeon;
+function PlayerWalkState:init(player, dungeon, room)
+    EntityWalkState.init(self, player, dungeon, room);
 end
 
 

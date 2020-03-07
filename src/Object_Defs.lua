@@ -18,6 +18,21 @@ GAME_OBJECT_DEFS = {
             }
         },
         default_State = 'off',
-    }
+    },
 
+    ['box'] = {
+        width = 13,
+        height = 14,
+        offset_X = 1,
+        offset_Y = 0,
+        type = 'box',
+        texture = 'tiles',
+        solid = true,
+        states = {
+            ['normal'] = {
+                frame = 109
+            }
+        },
+        default_State = 'normal',
+    }
 }
