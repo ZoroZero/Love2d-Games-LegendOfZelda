@@ -22,6 +22,7 @@ ENTITY_DEF = {
                 interval = 1,
                 texture = 'character_walk'
             },
+            -- walk
             ['walk-up'] = {
                 frames = {9, 10, 11, 12},
                 interval = 0.2,
@@ -41,13 +42,40 @@ ENTITY_DEF = {
                 frames = {5, 6, 7, 8},
                 interval = 0.2,
                 texture = 'character_walk'
+            },
+            -- attack
+            ['attack-up'] = {
+                frames = {5, 6, 7, 8},
+                interval = 0.05,
+                looping = false,
+                texture = 'character_attack'
+            },
+            ['attack-down'] = {
+                frames = {1, 2, 3, 4},
+                interval = 0.05,
+                looping = false,
+                texture = 'character_attack'
+            },
+            ['attack-left'] = {
+                frames = {13, 14, 15, 16},
+                interval = 0.05,
+                looping = false,
+                texture = 'character_attack'
+            },
+            ['attack-right'] = {
+                frames = {9, 10, 11, 12},
+                interval = 0.05,
+                looping = false,
+                texture = 'character_attack'
             }
         }
     },
     ['skeleton'] = {
         texture = 'entities',
-        width = 16,
+        width = 12,
         height = 16,
+        offset_X = 2,
+        offset_Y = 0,
         animations = {
             ['idle-up'] = {
                 frames = {47},
@@ -87,7 +115,9 @@ ENTITY_DEF = {
     ['bat'] = {
         texture = 'entities',
         width = 16,
-        height = 13,
+        height = 10,
+        offset_X = 0,
+        offset_Y = 1,
         animations = {
             ['idle-up'] = {
                 frames = {89},
@@ -127,7 +157,9 @@ ENTITY_DEF = {
     ['slime'] = {
         texture = 'entities',
         width = 16,
-        height = 16,
+        height = 13,
+        offset_X = 0,
+        offset_Y = 3,
         animations = {
             ['idle-up'] = {
                 frames = {86},
@@ -167,7 +199,9 @@ ENTITY_DEF = {
     ['ghost'] = {
         texture = 'entities',
         width = 16,
-        height = 16,
+        height = 14,
+        offset_X = 0,
+        offset_Y = 0,
         animations = {
             ['idle-up'] = {
                 frames = {92},
@@ -207,7 +241,9 @@ ENTITY_DEF = {
     ['spider'] = {
         texture = 'entities',
         width = 16,
-        height = 16,
+        height = 10,
+        offset_X = 0,
+        offset_Y = 6,
         animations = {
             ['idle-up'] = {
                 frames = {95},

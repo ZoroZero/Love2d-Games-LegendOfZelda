@@ -113,6 +113,9 @@ end
 -- Damage entity
 function Entity:damage(dam)
     self.health = self.health - dam;
+    if self.health == 0 then 
+        self.is_Dead = true;
+    end
 end
 
 

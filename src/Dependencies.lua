@@ -17,6 +17,8 @@ require 'src/Ultil'
 -- Animation file
 require 'src/Animation'
 
+-- Hitbox, hurt box file
+require 'src/Hitbox'
 -- Level generation file
 
 -- Game component
@@ -44,4 +46,5 @@ require 'src/states/entity/EntityWalkState'
 -- Player state
 require 'src/states/player/PlayerIdleState'
 require 'src/states/player/PlayerWalkState'
+require 'src/states/player/PlayerAttackState'
 

@@ -62,7 +62,8 @@ game_Textures = {
     ['entities'] = love.graphics.newImage('assets/graphics/entities.png'),
     ['switches'] = love.graphics.newImage('assets/graphics/switches.png'),
     ['character_walk'] = love.graphics.newImage('assets/graphics/character_walk.png'),
-    ['hearts'] = love.graphics.newImage('assets/graphics/hearts.png')
+    ['hearts'] = love.graphics.newImage('assets/graphics/hearts.png'),
+    ['character_attack'] = love.graphics.newImage('assets/graphics/character_swing_sword.png')
 }
 
 
@@ -73,4 +74,5 @@ game_Frames = {
     ['switches'] = generateQuad(game_Textures['switches'], TILE_SIZE, TILE_SIZE),
     ['character_walk'] = generateQuad(game_Textures['character_walk'], TILE_SIZE, 32),
     ['hearts'] = generateQuad(game_Textures['hearts'], TILE_SIZE, TILE_SIZE),
+    ['character_attack'] = generateQuad(game_Textures['character_attack'], 32, 32)
 }

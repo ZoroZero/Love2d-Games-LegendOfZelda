@@ -31,6 +31,9 @@ function PlayerWalkState:update(dt)
         self.entity:changeState('idle');
     end
 
+    if love.keyboard.wasPressed('j') then 
+        self.entity:changeState('attack');
+    end
 
     -- PLayer moving
     EntityWalkState.update(self, dt);

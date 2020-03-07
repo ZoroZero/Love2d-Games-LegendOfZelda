@@ -17,16 +17,18 @@ function PlayState:init()
             health = 6,
             offset_Y = 5,
     };
-
-    self.player.stateMachine = StateMachine{
-        ['idle'] = function () return PlayerIdleState(self.player) end,
-        ['walk'] = function () return PlayerWalkState(self.player) end
-    }
-    self.player:changeState('idle');
-
     self.dungeon = Dungeon(self.player);
 
     self.current_Room = Room(self.player);
+
+    self.player.stateMachine = StateMachine{
+        ['idle'] = function () return PlayerIdleState(self.player) end,
+        ['walk'] = function () return PlayerWalkState(self.player) end,
+        ['attack'] = function () return PlayerAttackState(self.player, self.dungeon) end
+    }
+    self.player:changeState('idle');
+
+   
     
 end
 

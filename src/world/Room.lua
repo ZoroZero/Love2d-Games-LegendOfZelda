@@ -85,7 +85,9 @@ function Room:render()
     end
 
     for k , entity in pairs(self.entities) do
-        entity:render(self.adjacent_Offset_X, self.adjacent_Offset_Y)
+        if not entity.is_Dead then
+            entity:render(self.adjacent_Offset_X, self.adjacent_Offset_Y)
+        end
     end
 
     love.graphics.stencil(function() 
@@ -168,6 +170,8 @@ function Room:generateEnemy()
             width =  ENTITY_DEF[enemy_Type].width,
             height = ENTITY_DEF[enemy_Type].height,
 
+            offset_X = ENTITY_DEF[enemy_Type].offset_X,
+            offset_Y = ENTITY_DEF[enemy_Type].offset_Y,
             walk_Speed = 20,
 
             health = 1
