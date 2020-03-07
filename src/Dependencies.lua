@@ -4,6 +4,8 @@ Class = require 'lib/class';
 
 Timer = require 'lib/knife.timer'
 
+Event = require 'lib/knife.event'
+
 -- Constants
 require 'src/constants'
 require 'src/Entity_Defs'

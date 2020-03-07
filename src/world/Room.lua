@@ -72,7 +72,7 @@ function Room:render()
     for y = 1, self.height do 
         for x = 1, self.width do
             love.graphics.draw(game_Textures['tiles'], game_Frames['tiles'][self.tiles[y][x].id], 
-            (x-1)*TILE_SIZE + self.render_Offset_X, (y-1)*TILE_SIZE + self.render_Offset_Y);
+            (x-1)*TILE_SIZE + self.render_Offset_X + self.adjacent_Offset_X, (y-1)*TILE_SIZE + self.render_Offset_Y +self.adjacent_Offset_Y);
         end
     end
 
