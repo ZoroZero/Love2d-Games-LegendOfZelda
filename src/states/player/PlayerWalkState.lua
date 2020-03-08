@@ -119,13 +119,36 @@ end
 -- PICK UP FUNCTION
 function PlayerWalkState:pickUp()
     local pickUp = false; 
+    -- Change position to check for collision
+    if self.entity.direction == 'left' then 
+        self.entity.x = self.entity.x - 1;
+    elseif self.entity.direction == 'right' then 
+        self.entity.x = self.entity.x + 1;
+    elseif self.entity.direction == 'up' then 
+        self.entity.y = self.entity.y - 1;
+    elseif self.entity.direction == 'down' then 
+        self.entity.y = self.entity.y + 1;
+    end
+
+    -- Check for block collision
     for k, object in pairs(self.objects) do 
-        if not self.entity:collide(object) and object.solid and not pickUp and not self.object then 
+        if self.entity:collide(object) and object.solid and not pickUp and not self.object then 
             if love.keyboard.wasPressed('k') then 
-                self.entity:changeState('walk', {carry_object = object});
+                self.entity:changeState('carry', {carry_object = object});
                 pickUp = true;
                 table.remove(self.objects, k);
             end
         end
+    end
+
+    -- re-adjust the position
+    if self.entity.direction == 'left' then 
+        self.entity.x = self.entity.x + 1;
+    elseif self.entity.direction == 'right' then 
+        self.entity.x = self.entity.x - 1;
+    elseif self.entity.direction == 'up' then 
+        self.entity.y = self.entity.y + 1;
+    elseif self.entity.direction == 'down' then 
+        self.entity.y = self.entity.y - 1;
     end
 end

@@ -20,8 +20,9 @@ function love.load()
 
     -- SET UP STATE MACHINE
     game_State_Machine = StateMachine {
-        ['start'] = function () return StartState() end;
-        ['play'] = function () return PlayState() end;
+        ['start'] = function () return StartState() end,
+        ['play'] = function () return PlayState() end,
+        ['game_over'] = function () return GameOverState() end
     }
 
     game_State_Machine:change('start');

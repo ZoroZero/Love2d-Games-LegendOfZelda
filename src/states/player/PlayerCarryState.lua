@@ -7,46 +7,28 @@ function PlayerCarryState:init(player, dungeon)
     -- change render for space
     self.player.offset_Y = 2;
     self.player.offset_X = 0;
-    self.player:changeAnimation('carry-idle-' .. self.player.direction)
+    self.player:changeAnimation('pick-up-' .. self.player.direction)
 
     self.dungeon = dungeon
-
-    
 end
 
 -- ENTER
 function PlayerCarryState:enter(params)
     self.object = params.carry_object;
+    self.player.currentAnimation:refresh()
+    Timer.tween(0.2, {
+        [self.object] = {x = self.player.x, y = self.player.y - 9}
+    });
+    
 end
 
 -- UPDATE
 function PlayerCarryState:update(dt)
+    self.player.currentAnimation:update(dt);
 
-    if love.keyboard.isDown('up') then 
-        self.player.direction = 'up';
-        self.player:changeAnimation('carry-walk-' .. self.player.direction)
-
-    elseif love.keyboard.isDown('down') then 
-        self.player.direction = 'down';
-        self.player:changeAnimation('carry-walk-' .. self.player.direction)
-
-    elseif love.keyboard.isDown('left') then 
-        self.player.direction = 'left';
-        self.player:changeAnimation('carry-walk-' .. self.player.direction)
-
-    elseif love.keyboard.isDown('right') then 
-        self.player.direction = 'right';
-        self.player:changeAnimation('carry-walk-' .. self.player.direction)
-
-    else 
-        self.player:changeAnimation('carry-idle-' .. self.player.direction)
-    end
-
-    if love.keyboard.wasPressed('space') then 
-        local bullet = Projectile(
-            PROJECTILE_DEFS['box'], self.player.direction, self.player.x, math.floor(self.player.y)
-        )
-        table.insert(self.dungeon.current_Room.projectiles, bullet);
+    if self.player.currentAnimation.time_Played > 0.2 then 
+        self.player.currentAnimation.time_Played = 0;
+        self.player:changeState('idle', {carry_object = self.object});
     end
 end
 

@@ -79,6 +79,9 @@ function Room:update(dt)
             game_Sounds['hit_player']:play()
             self.player:damage(1);
             self.player:goInvulnerable(1.5);
+            if self.player.health == 0 then 
+                game_State_Machine:change('game_over');
+            end
         end
     end
 

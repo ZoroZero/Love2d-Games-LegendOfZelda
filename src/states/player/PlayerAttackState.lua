@@ -68,7 +68,7 @@ function PlayerAttackState:update(dt)
     -- Play animation only one time
     if self.player.currentAnimation.time_Played > 0.2 then 
         self.player.currentAnimation.time_Played = 0;
-        self.player:changeState('idle');
+        self.player:changeState('idle', {});
     end
 
     if love.keyboard.wasPressed('space') then 
