@@ -22,12 +22,14 @@ function Room:init(player)
 
 
     -- doorway
-    self.doorways = {}
+    self.doorways = {};
     table.insert(self.doorways, Doorway('right', false, 1) );
     table.insert(self.doorways, Doorway('top', false, 1) );
     table.insert(self.doorways, Doorway('bottom', false, 1) );
     table.insert(self.doorways, Doorway('left', false, 1) );
 
+    -- Projectile
+    self.projectiles = {};
     -- NEXT ROOM
     self.next_Room = nil;
 
@@ -56,6 +58,20 @@ function Room:update(dt)
         end
     end
 
+    for k, projectile in pairs(self.projectiles) do 
+        projectile:update(dt)
+        if projectile.move_Distance > 64 then 
+            table.remove( self.projectiles, k );
+        end
+
+        for k , entity in pairs(self.entities) do
+            if entity:collide(projectile) then 
+                entity:damage(1);
+                entity:goInvulnerable(0.05);
+            end
+        end
+    end
+
     for k , entity in pairs(self.entities) do
         entity:processAI({room = 1}, dt);
         entity:update(dt);
@@ -65,6 +81,8 @@ function Room:update(dt)
             self.player:goInvulnerable(1.5);
         end
     end
+
+    
 
     self.player:update(dt);
 end
@@ -91,6 +109,10 @@ function Room:render()
         if not entity.is_Dead then
             entity:render(self.adjacent_Offset_X, self.adjacent_Offset_Y)
         end
+    end
+
+    for k, projectile in pairs(self.projectiles) do 
+        projectile:render(self.adjacent_Offset_X, self.adjacent_Offset_Y);
     end
 
     love.graphics.stencil(function() 

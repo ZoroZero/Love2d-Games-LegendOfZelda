@@ -1,12 +1,11 @@
 PlayerIdleState = Class {__includes = EntityIdleState}
 
 
--- -- INIT
--- function PlayerIdleState:init(player)
---     self.player = player;
-
---     self.player:changeAnimation('idle-' .. self.player.direction)
--- end
+-- INIT
+function PlayerIdleState:init(player, dungeon)
+    EntityIdleState.init(self, player);
+    self.dungeon = dungeon;
+end
 
 -- ENTER 
 function PlayerIdleState:enter(params)
@@ -37,6 +36,12 @@ function PlayerIdleState:update(dt)
         self.entity:changeState('attack');
     end
 
+    if love.keyboard.wasPressed('j') then 
+        local bullet = Projectile(
+            PROJECTILE_DEFS['box'], self.entity.direction, self.entity.x, math.floor(self.entity.y + self.entity.height/3)
+        )
+        table.insert(self.dungeon.current_Room.projectiles, bullet);
+    end
 end
 
 -- RENDER

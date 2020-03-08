@@ -10,6 +10,7 @@ Event = require 'lib/knife.event'
 require 'src/constants'
 require 'src/Entity_Defs'
 require 'src/Object_Defs'
+require 'src/Projectile_Defs'
 -- State 
 require 'src/StateMachine'
 
@@ -26,7 +27,7 @@ require 'src/Hitbox'
 -- Game component
 require 'src/Entity'
 require 'src/GameObject'
-
+require 'src/Projectile'
 require 'src/Player'
 -- Game world
 require 'src/world/Room'

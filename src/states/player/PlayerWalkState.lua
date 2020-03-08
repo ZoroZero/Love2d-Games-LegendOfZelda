@@ -33,6 +33,13 @@ function PlayerWalkState:update(dt)
         self.entity:changeState('attack');
     end
 
+    if love.keyboard.wasPressed('j') then 
+        local bullet = Projectile(
+            PROJECTILE_DEFS['box'], self.entity.direction, self.entity.x, math.floor(self.entity.y + self.entity.height/3)
+        )
+        table.insert(self.dungeon.current_Room.projectiles, bullet);
+    end
+
     -- PLayer moving
     EntityWalkState.update(self, dt);
 
@@ -76,6 +83,8 @@ function PlayerWalkState:update(dt)
         end
 
     end
+
+    
 end 
 
 -- RENDER

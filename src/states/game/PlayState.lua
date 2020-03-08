@@ -22,7 +22,7 @@ function PlayState:init()
     self.current_Room = Room(self.player);
 
     self.player.stateMachine = StateMachine{
-        ['idle'] = function () return PlayerIdleState(self.player) end,
+        ['idle'] = function () return PlayerIdleState(self.player, self.dungeon) end,
         ['walk'] = function () return PlayerWalkState(self.player, self.dungeon, self.current_Room.objects) end,
         ['attack'] = function () return PlayerAttackState(self.player, self.dungeon) end
     }
