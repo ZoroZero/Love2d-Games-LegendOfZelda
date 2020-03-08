@@ -68,10 +68,10 @@ function Entity:render(adjacent_Offset_X, adjacent_Offset_Y)
     
     self.x ,self.y = self.x + (adjacent_Offset_X or 0), self.y + (adjacent_Offset_Y or 0);
     self.stateMachine:render();
-    -- Check hit box of entity
-    love.graphics.setColor(1,0,0,1);
-    love.graphics.rectangle('line', self.x, self.y, self.width, self.height);
-    love.graphics.setColor(1,1,1,1);
+    -- Check hit box of entity. Debug mod only
+    -- love.graphics.setColor(1,0,0,1);
+    -- love.graphics.rectangle('line', self.x, self.y, self.width, self.height);
+    -- love.graphics.setColor(1,1,1,1);
     self.x ,self.y = self.x - (adjacent_Offset_X or 0), self.y - (adjacent_Offset_Y or 0);
 end
 

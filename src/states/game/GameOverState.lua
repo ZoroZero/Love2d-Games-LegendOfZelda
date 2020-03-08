@@ -10,7 +10,8 @@ GameOverState = Class {__includes = BaseState}
 -- UPDATE
 function GameOverState:update(dt)
     if love.keyboard.wasPressed('enter') or love.keyboard.wasPressed('return') then 
-        game_State_Machine:change('play');
+        game_Sounds['confirm']:play();
+        game_State_Machine:change('start');
     end
 end
 

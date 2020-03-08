@@ -94,7 +94,8 @@ function Doorway:render(adjacent_Offset_X, adjacent_Offset_Y)
         end
     end
 
-    love.graphics.setColor(1,0,0,1);
-    love.graphics.rectangle('line', self.x, self.y, self.width, self.height);
-    love.graphics.setColor(1,1,1,1);
+    -- Debug mode only
+    -- love.graphics.setColor(1,0,0,1);
+    -- love.graphics.rectangle('line', self.x, self.y, self.width, self.height);
+    -- love.graphics.setColor(1,1,1,1);
 end

@@ -48,6 +48,9 @@ game_Sounds = {
     ['hit_player'] = love.audio.newSource('assets/sounds/hit_player.wav', 'static'),
     ['music'] = love.audio.newSource('assets/sounds/music.mp3', 'static'),
     ['sword'] = love.audio.newSource('assets/sounds/sword.wav', 'static'),
+    ['death'] = love.audio.newSource('assets/sounds/death.wav', 'static'),
+    ['pickup'] = love.audio.newSource('assets/sounds/pickup.wav', 'static'),
+    ['confirm'] = love.audio.newSource('assets/sounds/confirm.wav', 'static')
 }
 
 -- FONT

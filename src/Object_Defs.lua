@@ -34,5 +34,21 @@ GAME_OBJECT_DEFS = {
             }
         },
         default_State = 'normal',
-    }
+    },
+
+    ['heart'] = {
+        width = 16,
+        height = 16,
+        type = 'hearts',
+        texture = 'hearts',
+        consumable = true,
+        frame = 1,
+        solid = false,
+        states = {
+            ['on'] = {
+                frame = 5
+            },
+        },
+        default_State = 'on',
+    },
 }

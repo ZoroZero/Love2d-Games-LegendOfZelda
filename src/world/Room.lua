@@ -54,7 +54,12 @@ function Room:update(dt)
     for k , object in pairs(self.objects) do
         object:update(dt);
         if self.player:collide(object) then 
-            object:onCollide();
+            if object.consumable then 
+                object:onConsume()
+                table.remove(self.objects, k);
+            else
+                object:onCollide();
+            end
         end
     end
 
@@ -64,23 +69,26 @@ function Room:update(dt)
             table.remove( self.projectiles, k );
         end
 
-        for k , entity in pairs(self.entities) do
-            if entity:collide(projectile) then 
+        for j , entity in pairs(self.entities) do
+            if entity:collide(projectile) and not entity.is_Dead then 
+                game_Sounds['hit_enemy']:play();
                 entity:damage(1);
-                entity:goInvulnerable(0.05);
             end
         end
     end
 
     for k , entity in pairs(self.entities) do
-        entity:processAI({room = 1}, dt);
-        entity:update(dt);
-        if not entity.is_Dead and entity:collide(self.player) and not self.player.invulnerable then 
-            game_Sounds['hit_player']:play()
-            self.player:damage(1);
-            self.player:goInvulnerable(1.5);
-            if self.player.health == 0 then 
-                game_State_Machine:change('game_over');
+        if not entity.is_Dead then
+            entity:processAI({room = 1}, dt);
+            entity:update(dt);
+            if not entity.is_Dead and entity:collide(self.player) and not self.player.invulnerable then 
+                game_Sounds['hit_player']:play()
+                self.player:damage(1);
+                self.player:goInvulnerable(1.5);
+                if self.player.health == 0 then 
+                    game_Sounds['death']:play();
+                    game_State_Machine:change('game_over');
+                end
             end
         end
     end

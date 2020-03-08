@@ -44,7 +44,7 @@ function PlayerWalkState:update(dt)
 
     if love.keyboard.wasPressed('j') and self.object then 
         local bullet = Projectile(
-            PROJECTILE_DEFS['box'], self.entity.direction, self.object.x, self.object.y );
+            PROJECTILE_DEFS['box'], self.entity.direction, self.object.x, self.object.y - 4 );
         table.insert(self.dungeon.current_Room.projectiles, bullet);
         self.entity:changeState('idle', {carry_object = nil})
     end
@@ -134,6 +134,7 @@ function PlayerWalkState:pickUp()
     for k, object in pairs(self.objects) do 
         if self.entity:collide(object) and object.solid and not pickUp and not self.object then 
             if love.keyboard.wasPressed('k') then 
+                game_Sounds['hit_player']:play();
                 self.entity:changeState('carry', {carry_object = object});
                 pickUp = true;
                 table.remove(self.objects, k);

@@ -62,6 +62,19 @@ function PlayerAttackState:update(dt)
         if entity:collide(self.attack_Hitbox) then 
             entity:damage(1);
             game_Sounds['hit_enemy']:play()
+            if entity.is_Dead then 
+                if math.random(3) == 1 then
+                    local heart = GameObject(
+                        GAME_OBJECT_DEFS['heart'], 
+                        entity.x, entity.y);
+                    heart.onConsume = function() 
+                        game_Sounds['pickup']:stop();
+                        game_Sounds['pickup']:play();
+                        self.player.health = self.player.health < 6 and self.player.health + 1 or 6;
+                    end
+                    table.insert( self.dungeon.current_Room.objects, heart);
+                end
+            end
         end
     end
 
@@ -84,9 +97,9 @@ function PlayerAttackState:render()
         math.floor(self.player.x - self.player.offset_X), math.floor(self.player.y - self.player.offset_Y)
     );
 
-    -- debug hit box
-    love.graphics.setColor(0,1,0,1);
-    love.graphics.rectangle('line', self.player.x, self.player.y, self.player.width,self.player.height);
-    love.graphics.rectangle('line', self.attack_Hitbox.x, self.attack_Hitbox.y, self.attack_Hitbox.width,self.attack_Hitbox.height);
-    love.graphics.setColor(1,1,1,1);
+    -- debug mode hit box
+    -- love.graphics.setColor(0,1,0,1);
+    -- love.graphics.rectangle('line', self.player.x, self.player.y, self.player.width,self.player.height);
+    -- love.graphics.rectangle('line', self.attack_Hitbox.x, self.attack_Hitbox.y, self.attack_Hitbox.width,self.attack_Hitbox.height);
+    -- love.graphics.setColor(1,1,1,1);
 end

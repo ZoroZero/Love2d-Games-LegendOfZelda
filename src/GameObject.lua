@@ -24,9 +24,11 @@ function GameObject:init(params, x, y)
 
     -- Solid or not
     self.solid = params.solid;
+    self.consumable = params.consumable or false;
 
     -- on collide default function
     self.onCollide = function () end;
+    self.onConsume = function () end;
 end
 
 -- UPDATE
@@ -40,7 +42,7 @@ function GameObject:render(adjacent_Offset_X, adjacent_Offset_Y)
         math.floor(self.x + adjacent_Offset_X - self.offset_X), math.floor(self.y + adjacent_Offset_Y - self.offset_Y))
 
     -- DEBug mode
-    love.graphics.setColor(1,0,0,1);
-    love.graphics.rectangle('line', self.x, self.y, self.width, self.height);
-    love.graphics.setColor(1,1,1,1);
+    -- love.graphics.setColor(1,0,0,1);
+    -- love.graphics.rectangle('line', self.x, self.y, self.width, self.height);
+    -- love.graphics.setColor(1,1,1,1);
 end
