@@ -23,10 +23,11 @@ function PlayState:init()
 
     self.player.stateMachine = StateMachine{
         ['idle'] = function () return PlayerIdleState(self.player, self.dungeon) end,
-        ['walk'] = function () return PlayerWalkState(self.player, self.dungeon, self.current_Room.objects) end,
-        ['attack'] = function () return PlayerAttackState(self.player, self.dungeon) end
+        ['walk'] = function () return PlayerWalkState(self.player, self.dungeon, self.dungeon.current_Room.objects) end,
+        ['attack'] = function () return PlayerAttackState(self.player, self.dungeon) end,
+        ['carry'] = function () return PlayerCarryState(self.player, self.dungeon) end
     }
-    self.player:changeState('idle');
+    self.player:changeState('idle', {carry_object = nil});
 
    
     

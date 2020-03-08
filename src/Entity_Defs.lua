@@ -67,7 +67,50 @@ ENTITY_DEF = {
                 interval = 0.05,
                 looping = false,
                 texture = 'character_attack'
-            }
+            },
+
+            -- pick up
+            ['carry-idle-up'] = {
+                frames = {9},
+                interval = 1,
+                texture = 'character_carry'
+            },
+            ['carry-idle-down'] = {
+                frames = {1},
+                interval = 1,
+                texture = 'character_carry'
+            },
+            ['carry-idle-left'] = {
+                frames = {13},
+                interval = 1,
+                texture = 'character_carry'
+            },
+            ['carry-idle-right'] = {
+                frames = {5},
+                interval = 1,
+                texture = 'character_carry'
+            },
+            -- walk
+            ['carry-walk-up'] = {
+                frames = {9, 10, 11, 12},
+                interval = 0.2,
+                texture = 'character_carry'
+            },
+            ['carry-walk-down'] = {
+                frames = {1, 2, 3, 4},
+                interval = 0.2,
+                texture = 'character_carry'
+            },
+            ['carry-walk-left'] = {
+                frames = {13, 14, 15, 16},
+                interval = 0.2,
+                texture = 'character_carry'
+            },
+            ['carry-walk-right'] = {
+                frames = {5, 6, 7, 8},
+                interval = 0.2,
+                texture = 'character_carry'
+            },
         }
     },
     ['skeleton'] = {

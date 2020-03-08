@@ -50,4 +50,4 @@ require 'src/states/entity/EntityWalkState'
 require 'src/states/player/PlayerIdleState'
 require 'src/states/player/PlayerWalkState'
 require 'src/states/player/PlayerAttackState'
-
+require 'src/states/player/PlayerCarryState'

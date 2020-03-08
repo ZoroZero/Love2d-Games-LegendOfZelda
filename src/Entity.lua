@@ -53,8 +53,8 @@ end
 
 
 -- CHANGE STATE FUNCTION
-function Entity:changeState(name)
-    self.stateMachine:change(name)
+function Entity:changeState(name, params)
+    self.stateMachine:change(name, params)
 end
 
 

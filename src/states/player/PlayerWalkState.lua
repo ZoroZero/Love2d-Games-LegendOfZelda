@@ -1,47 +1,63 @@
 PlayerWalkState = Class {__includes = EntityWalkState}
 
 -- INIT
-function PlayerWalkState:init(player, dungeon, room)
-    EntityWalkState.init(self, player, dungeon, room);
+function PlayerWalkState:init(player, dungeon, objects)
+    EntityWalkState.init(self, player, dungeon, objects);
+    self.state = 'walk-';
 end
 
+-- ENTER
+function PlayerWalkState:enter(params)
+    self.object = params.carry_object;
+        
+    if self.object then
+        self.state = 'carry-walk-';
+    end
+end
 
 -- UPDATE
 function PlayerWalkState:update(dt)
     -- PLayer change direction
     if love.keyboard.isDown('up') then 
         self.entity.direction = 'up';
-        self.entity:changeAnimation('walk-' .. self.entity.direction)
+        self.entity:changeAnimation(self.state .. self.entity.direction)
 
     elseif love.keyboard.isDown('down') then 
         self.entity.direction = 'down';
-        self.entity:changeAnimation('walk-' .. self.entity.direction)
+        self.entity:changeAnimation(self.state .. self.entity.direction)
 
     elseif love.keyboard.isDown('left') then 
         self.entity.direction = 'left';
-        self.entity:changeAnimation('walk-' .. self.entity.direction)
+        self.entity:changeAnimation(self.state .. self.entity.direction)
 
     elseif love.keyboard.isDown('right') then 
         self.entity.direction = 'right';
-        self.entity:changeAnimation('walk-' .. self.entity.direction)
+        self.entity:changeAnimation(self.state .. self.entity.direction)
 
     else 
-        self.entity:changeState('idle');
+        self.entity:changeState('idle', {carry_object = self.object});
     end
 
     if love.keyboard.wasPressed('space') then 
         self.entity:changeState('attack');
     end
 
-    if love.keyboard.wasPressed('j') then 
+    if love.keyboard.wasPressed('j') and self.object then 
         local bullet = Projectile(
-            PROJECTILE_DEFS['box'], self.entity.direction, self.entity.x, math.floor(self.entity.y + self.entity.height/3)
-        )
+            PROJECTILE_DEFS['box'], self.entity.direction, self.object.x, self.object.y );
         table.insert(self.dungeon.current_Room.projectiles, bullet);
+        self.entity:changeState('idle', {carry_object = nil})
     end
+    
+    self:pickUp();
 
     -- PLayer moving
     EntityWalkState.update(self, dt);
+
+    if self.object then 
+        self.object.x = self.entity.x + self.object.offset_X;
+        self.object.y = self.entity.y - 9;
+    end
 
     if self.bumped then 
         -- Left collision
@@ -93,4 +109,23 @@ function PlayerWalkState:render()
     love.graphics.draw(game_Textures[ani.texture], game_Frames[ani.texture][ani:getCurrentFrame()],
         math.floor(self.entity.x - self.entity.offset_X), math.floor(self.entity.y - self.entity.offset_Y)
     );
+
+    if self.object then 
+        self.object:render(0, 0);
+    end
+end
+
+
+-- PICK UP FUNCTION
+function PlayerWalkState:pickUp()
+    local pickUp = false; 
+    for k, object in pairs(self.objects) do 
+        if not self.entity:collide(object) and object.solid and not pickUp and not self.object then 
+            if love.keyboard.wasPressed('k') then 
+                self.entity:changeState('walk', {carry_object = object});
+                pickUp = true;
+                table.remove(self.objects, k);
+            end
+        end
+    end
 end
